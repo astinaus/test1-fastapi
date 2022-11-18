@@ -3,10 +3,11 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 
+
 class ResponseDTO(BaseModel):
     code: int
     message: str
-    data: object
+    data: object | None
 
 
 class Cat(BaseModel):
@@ -40,6 +41,7 @@ async def error():
         data=None
     )
     return JSONResponse(status_code=404, content=jsonable_encoder(dto))
+
 
 @app.get("/error1")
 async def error1():
